@@ -1,27 +1,47 @@
-CC = cc
+# Compiler & Flags
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror -g
 
-SRC =	srcs/main.c \
+# Library
+LIBFT       = @make -C ./libft
+LIB         = libft/libft.a
 
-OBJ =	$(SRC:.c=.o)
+# Project Name
+NAME        = pipex
 
+# Sources & Objects
+SRCS        =	srcs/main.c \
+				srcs/pipex_utile.c\
 
-CFLAGS += -Wall -Wextra -Werror
+OBJ_FOLDER  = objs
+OBJS        = $(patsubst srcs/%.c, $(OBJ_FOLDER)/%.o, $(SRCS))
 
-LIBFT = Libft/libft.a
+# Includes
+INCLUDES    = includes
 
-NAME =	pipex.a
+# Rules
+all: $(NAME)
 
-all:	$(NAME) $(OBJ)
+$(NAME): $(OBJS) libft
+	@$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
 
-$(NAME): $(OBJ)
-	cc $(NAME) $(OBJ) $(LIBFT)
+$(OBJ_FOLDER)/%.o: srcs/%.c
+	@mkdir -p $(OBJ_FOLDER)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
+
+libft:
+	$(LIBFT)
 
 clean:
-	rm -f $(OBJ
+	@rm -f $(OBJS)
+	@cd libft && make clean
+	@rm -rf $(OBJ_FOLDER)
 
-fclean:	clean
-	rm -f $(NAME) $(OBJ)
+fclean:
+	@rm -f $(NAME) $(OBJS)
+	@cd libft && make fclean
+	@rm -rf $(OBJ_FOLDER)
 
-re:	fclean all
+re: fclean all
 
-.PHONY: all clean fclean libft re bonus
+.PHONY: all clean fclean re libft

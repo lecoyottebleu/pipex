@@ -6,7 +6,7 @@
 /*   By: mlancelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 08:35:39 by mlancelo          #+#    #+#             */
-/*   Updated: 2025/01/14 12:03:51 by mlancelo         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:45:35 by mlancelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	(void) argc;
-	(void) argv;
-
-	int		i;
-	char	*chemin_path;
-	i = 0;
-	while(envp[i])
-	{
-		chemin_path = ft_strnstr(envp[i], "PATH=", 5);
-		i++;
-	}
-	printf("%s", chemin_path);
+	if	(argc != 5)
+		return (0);
+//1
+	int	index_path;
+	index_path = check_path(envp);
+//2
+	char	*val_check_cmd[2];
+	val_check_cmd[0] = check_cmd(argv[2], envp[index_path]);
+	val_check_cmd[1] = check_cmd(argv[3], envp[index_path]);
+	if (val_check_cmd[0] == NULL || val_check_cmd[1] == NULL)
+		printf("Error\n");
+	printf("%s\n%s", val_check_cmd[0], val_check_cmd[1]);
 	return 0;
 }

@@ -6,7 +6,7 @@
 #    By: mlancelo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 12:02:40 by mlancelo          #+#    #+#              #
-#    Updated: 2024/10/17 12:10:05 by mlancelo         ###   ########.fr        #
+#    Updated: 2025/01/16 19:38:55 by mlancelo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ OBJ =	$(SRC:.c=.o)
 
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
-CFLAGS += -Wall -Wextra -Werror
+CFLAGS += -Wall -Wextra -Werror -g
 
 NAME =	libft.a
 
@@ -72,7 +72,7 @@ bonus : $(OBJ_BONUS)
 
 $(NAME): $(OBJ)
 	ar r $(NAME) $(OBJ)
-	
+
 so:
 	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC) $(SRC_BONUS)
 	gcc -nostartfiles -shared -o libft.so $(OBJ) $(OBJ_BONUS)

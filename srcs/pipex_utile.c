@@ -6,7 +6,7 @@
 /*   By: mlancelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:02:29 by mlancelo          #+#    #+#             */
-/*   Updated: 2025/01/15 19:49:42 by mlancelo         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:01:04 by mlancelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ char	*check_cmd(char *cmd, char *path)
 			return (tmp);
 		i++;
 	}
+	free(tmp);
 	return (NULL);
 }

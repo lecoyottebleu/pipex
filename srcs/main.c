@@ -6,7 +6,7 @@
 /*   By: mlancelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 08:35:39 by mlancelo          #+#    #+#             */
-/*   Updated: 2025/01/16 17:45:59 by mlancelo         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:17:51 by mlancelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	if (val_check_cmd[0] == NULL || val_check_cmd[1] == NULL)
 		perror("access");
 	printf("%s\n%s", val_check_cmd[0], val_check_cmd[1]);
-
+	free(val_check_cmd[0]);
+	free(val_check_cmd[1]);
 	return 0;
 }

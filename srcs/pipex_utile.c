@@ -6,7 +6,7 @@
 /*   By: mlancelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:02:29 by mlancelo          #+#    #+#             */
-/*   Updated: 2025/01/16 20:06:01 by mlancelo         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:41:35 by mlancelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ int	check_path(char **env)
 	}
 	return (i - 1);
 }
+void    free_split(char **split)
+{
+    int i = 0;
+
+    if (!split)
+        return;
+    while (split[i])
+    {
+        free(split[i]);
+        i++;
+    }
+    free(split);
+}
 
 char	*check_cmd(char *cmd, char *path)
 {
@@ -34,6 +47,7 @@ char	*check_cmd(char *cmd, char *path)
 	char	**chemin;
 	char	*sep;
 	char	*tmp;
+	char	*tmp2;
 	char	*cmd_ptr;
 	int		i;
 
@@ -46,15 +60,19 @@ char	*check_cmd(char *cmd, char *path)
 	chemin = ft_split(path, ':');
 	while (chemin[i])
 	{
-		tmp = ft_strjoin(chemin[i], sep);
-
-		tmp = ft_strjoin(tmp, cmd);
+		tmp = ft_strjoin(chemin[i], sep); 
+		tmp2 = ft_strjoin(tmp, cmd);
 		printf("%s\n", chemin[i]);
-		free(chemin);
 		if (access(tmp, F_OK) == 0)
+		{
+			free_split(chemin);
+			free(tmp2);
 			return (tmp);
+		}
 		i++;
+		free(tmp);
+		free(tmp2);
 	}
-	free(tmp);
+	free_split(chemin);
 	return (NULL);
 }

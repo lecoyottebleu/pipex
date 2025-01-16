@@ -10,5 +10,5 @@ int main() {
         perror("execve"); // Affiche une erreur si execve échoue
     }
 
-    return 0; // Cette ligne ne sera atteinte que si execve échoue
+    return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: mlancelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:02:29 by mlancelo          #+#    #+#             */
-/*   Updated: 2025/01/16 18:01:04 by mlancelo         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:06:01 by mlancelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ char	*check_cmd(char *cmd, char *path)
 	while (chemin[i])
 	{
 		tmp = ft_strjoin(chemin[i], sep);
+
 		tmp = ft_strjoin(tmp, cmd);
 		printf("%s\n", chemin[i]);
+		free(chemin);
 		if (access(tmp, F_OK) == 0)
 			return (tmp);
 		i++;
